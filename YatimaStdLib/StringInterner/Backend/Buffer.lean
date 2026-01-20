@@ -55,7 +55,7 @@ def pushString (str : String) : BufferM Nat := do
 def decodeVarSize! (index : Nat) : BufferM (Nat × Nat) := do
   let first := (← get).data[index]!
   if first ≤ 0x7F then
-    return (first.val, 1)
+    return (first.toFin, 1)
   else
     let mut result := 0
     let mut i := 0
