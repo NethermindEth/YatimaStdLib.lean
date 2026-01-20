@@ -1,5 +1,4 @@
 import YatimaStdLib.Ring
-import Batteries.Data.Rat.Basic
 
 namespace Rat
 
