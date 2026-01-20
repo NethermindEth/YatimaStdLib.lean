@@ -24,7 +24,7 @@ def leadingZeroBits (bytes : ByteArray) : Nat := Id.run do
 
 /-- Appends `n` bytes of `0`s to a `ByteArray` -/
 def pushZeros (bytes : ByteArray) (n : Nat) : ByteArray :=
-  bytes ++ ⟨.mkArray n 0⟩
+  bytes ++ ⟨.replicate n 0⟩
 
 def beqL (a b : ByteArray) : Bool :=
   a.data == b.data
@@ -91,7 +91,7 @@ def shiftLeft (bs : ByteArray) : ByteArray := Id.run do
   answer
 
 /-- Shift the `ByteArray` right by `n` bytes by prepending the `n`-length array of `0`s -/
-def shiftRight8n (bs : ByteArray) (n : Nat) := ⟨.mkArray n 0⟩ ++ bs
+def shiftRight8n (bs : ByteArray) (n : Nat) := ⟨.replicate n 0⟩ ++ bs
 
 def shiftAdd (bs : ByteArray) (b : Bit) : ByteArray :=
   let ans := shiftLeft bs
@@ -100,7 +100,7 @@ def shiftAdd (bs : ByteArray) (b : Bit) : ByteArray :=
 def sliceL (bs : ByteArray) (i n : Nat) : ByteArray :=
   let rec aux (acc : Array UInt8) : Nat → List UInt8 → Array UInt8
     | 0, _ => acc
-    | n, [] => acc ++ (.mkArray n 0)
+    | n, [] => acc ++ (.replicate n 0)
     | n + 1, b :: bs => aux (acc.push b) n bs
   .mk $ aux #[] n (bs.data.data.drop i)
 
@@ -112,7 +112,7 @@ theorem sliceL.aux_size : (sliceL.aux acc n bs).size = acc.size + n := by
   induction bs generalizing acc n
   · induction n
     · simp only [aux, Nat.add_zero]
-    · simp only [aux, mkArray, Nat.succ_eq_add_one, Array.append, Array.size]
+    · simp only [aux, Array.replicate, Nat.succ_eq_add_one, Array.append, Array.size]
       simp only [Array.append_data, List.length_append, Array.data_length, List.length_replicate] -- TODO: Clean up this mess at some point
   rename_i ih
   cases n

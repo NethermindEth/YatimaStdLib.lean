@@ -9,7 +9,7 @@ structure ByteVector (n : Nat) where
 namespace ByteVector
 
 instance : Inhabited (ByteVector n) where
-  default := ⟨.mk $ .mkArray n 0, by simp [ByteArray.size]⟩
+  default := ⟨.mk $ .replicate n 0, by simp [ByteArray.size]⟩
 
 instance : BEq (ByteVector n) where
   beq x y := x.data == y.data

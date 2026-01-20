@@ -131,7 +131,7 @@ def ByteArray.toBits (ba : ByteArray) : List Bit :=
 
 /-- Generates the array of binary expansions between `0` and `2^n` -/
 def getBits (n : Nat) : Array (Array Bit) := Id.run do
-  let mut answer := #[(.mkArray n 0)]
+  let mut answer := #[.replicate n 0]
   for x in [1:2^n] do
     let xBits := x |> (Nat.toDigits 2 ·)
                    |>.map (fun c => c.toNat - 48)

@@ -34,7 +34,7 @@ def dot (v w : Vector' R) : R := v.zip w |>.foldr (fun (x, y) acc => acc + x * y
 
 def scale (r : R) (v : Vector' R) : Vector' R := v.map fun x => x * r
 
-def zero (R) [OfNat R (nat_lit 0)] (dim : Nat) : Vector' R := Array.mkArray dim 0
+def zero (R) [OfNat R (nat_lit 0)] (dim : Nat) : Vector' R := Array.replicate dim 0
 
 instance : HMul R (Vector' R) (Vector' R) := ⟨scale⟩
 

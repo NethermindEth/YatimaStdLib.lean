@@ -72,7 +72,7 @@ def eval (f : Polynomial A) (a : A) : A :=
   let action (i : Fin f.size) c := c * a ^ (i : Nat)
   Array.foldr (. + .) 0 (f.mapIdx action)
 
-private def zeros (n : Nat) : Polynomial A := mkArray n 0
+private def zeros (n : Nat) : Polynomial A := Array.replicate n 0
 
 /-- The zero polynomial -/
 def zero : Polynomial A := #[0]
