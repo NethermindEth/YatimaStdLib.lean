@@ -30,7 +30,7 @@ require LSpec from git
 section ImportAll
 
 open System
-open Lean (RBTree)
+open Lean
 
 partial def getLeanFilePaths (fp : FilePath) (acc : Array FilePath := #[]) :
     IO $ Array FilePath := do
@@ -40,7 +40,7 @@ partial def getLeanFilePaths (fp : FilePath) (acc : Array FilePath := #[]) :
 
 def getAllFiles : ScriptM $ List String := do
   let paths := (← getLeanFilePaths ⟨"YatimaStdLib"⟩).map toString
-  let paths : RBTree String compare := RBTree.ofList paths.toList -- ordering
+  let paths : Std.TreeSet String compare := Std.TreeSet.ofList paths.toList -- ordering
   return paths.toList
 
 def getImportsString : ScriptM String := do
