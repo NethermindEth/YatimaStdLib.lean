@@ -12,9 +12,9 @@ variable (R : Type) [Ring R]
 
 section vector
 
-abbrev Vector := Array R
+abbrev Vector' := Array R
 
-namespace Vector
+namespace Vector'
 
 variable {R} [OfNat R (nat_lit 0)]
 
@@ -26,19 +26,19 @@ length, which is currently blocked by some formalization of Array lemmas that st
 in the standard library.
 -/
 
-def add (v w : Vector R) : Vector R := v.zip w |>.map fun (x, y) => x + y
+def add (v w : Vector' R) : Vector' R := v.zip w |>.map fun (x, y) => x + y
 
-instance : Add (Vector R) := ⟨add⟩
+instance : Add (Vector' R) := ⟨add⟩
 
-def dot (v w : Vector R) : R := v.zip w |>.foldr (fun (x, y) acc => acc + x * y) 0
+def dot (v w : Vector' R) : R := v.zip w |>.foldr (fun (x, y) acc => acc + x * y) 0
 
-def scale (r : R) (v : Vector R) : Vector R := v.map fun x => x * r
+def scale (r : R) (v : Vector' R) : Vector' R := v.map fun x => x * r
 
-def zero (R) [OfNat R (nat_lit 0)] (dim : Nat) : Vector R := Array.mkArray dim 0
+def zero (R) [OfNat R (nat_lit 0)] (dim : Nat) : Vector' R := Array.mkArray dim 0
 
-instance : HMul R (Vector R) (Vector R) := ⟨scale⟩
+instance : HMul R (Vector' R) (Vector' R) := ⟨scale⟩
 
-end Vector
+end Vector'
 end vector
 
 section matrix
@@ -58,8 +58,8 @@ namespace Matrix
 
 variable {R}
 
-def row (M : Matrix R) (i : Nat) : Vector R := Id.run do
-  let mut answer : Vector R := #[]
+def row (M : Matrix R) (i : Nat) : Vector' R := Id.run do
+  let mut answer : Vector' R := #[]
   for col in M do
     answer := answer.push col[i]!
   return answer
@@ -71,8 +71,8 @@ def transpose (M : Matrix R) : Matrix R := Id.run do
     answer := answer.push (row M idx)
   return answer
 
-def action (M : Matrix R) (v : Vector R) : Vector R :=
-  M.zip v |>.foldl (fun v (col, r) => v + r * col) (Vector.zero R v.size)
+def action (M : Matrix R) (v : Vector' R) : Vector' R :=
+  M.zip v |>.foldl (fun v (col, r) => v + r * col) (Vector'.zero R v.size)
 
 def mul (M N : Matrix R) : Matrix R :=
   N.map (fun v => action M v)

@@ -4,7 +4,7 @@ import YatimaStdLib.Matrix
 
 open Benchmark
 
-instance : FixedSize (Vector Nat) where
+instance : FixedSize (Vector' Nat) where
   random size := do
     let mut answer := #[]
     let g := (← get).down
