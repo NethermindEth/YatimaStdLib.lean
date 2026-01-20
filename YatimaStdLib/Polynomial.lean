@@ -29,7 +29,7 @@ instance [Inhabited R] : Inhabited (Polynomial R) where
 instance : Append (Polynomial A) where
   append := .append
 
-private def tail (ar : Polynomial A) : Polynomial A := ar.eraseIdx 0
+private def tail (ar : Polynomial A) : Polynomial A := ar.eraseIdxIfInBounds 0
 
 variable {A : Type _ } [Add A] [Mul A] [HPow A Nat A] [OfNat A (nat_lit 1)] [OfNat A (nat_lit 0)] 
                        [BEq A] [Div A] [Neg A]
