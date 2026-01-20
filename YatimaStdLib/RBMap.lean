@@ -7,7 +7,7 @@ open Std
 variable {cmp : α → α → Ordering}
 
 def enumList (xs : List α) : RBMap α Nat cmp :=
-  RBMap.ofList (xs.enum.map (fun (x, y) => (y, x))) cmp
+  RBMap.ofList xs.zipIdx cmp
 
 def unitMap (xs : List α) : RBMap α Unit cmp :=
   RBMap.ofList (xs.map (fun x => (x, ()))) cmp
@@ -36,4 +36,3 @@ def mapKeys [Ord χ] (m : RBMap α β cmp) (f : α → χ) : RBMap χ β compare
 
 def zipD (m₁ : RBMap α β₁ cmp) (m₂ : RBMap α β₂ cmp) (b₂ : β₂) : RBMap α (β₁ × β₂) cmp :=
   m₁.foldl (init := default) fun acc a b₁ => acc.insert a (b₁, m₂.findD a b₂)
-
