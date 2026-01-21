@@ -70,6 +70,9 @@ instance [Chainable α] : Mul (AddChain α) where
     let ch₂' := ch₂.last.map (fun x => x * last) 
     ch₁.append ch₂'
 
+instance [Chainable α] : GetElem (AddChain α) Nat α (fun xs i => i < xs.size) where
+  getElem (xs : Array α) i h := xs[i]'h
+
 /- 
 In this section we implement an efficient algorithm to calculate the minimal AddChain for a natural 
 number
@@ -101,7 +104,7 @@ end Nat
 namespace AddChain
 
 private def findStep [Chainable α] (ch : AddChain α) (idx : Nat) : ChainStep := Id.run do
-  let val := ch.get! idx
+  let val := ch[idx]!
 
   for (j, left) in ch.toList.enum do
     for (k, right) in ch[:j + 1].toArray.toList.enum do
