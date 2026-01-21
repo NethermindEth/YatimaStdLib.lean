@@ -10,7 +10,7 @@ lean_lib YatimaStdLib where
 def ffiC := "ffi.c"
 def ffiO := "ffi.o"
 
-target ffi.o pkg : FilePath := do
+target ffi.o pkg : System.FilePath := do
   let oFile := pkg.buildDir / ffiO
   let srcJob ← inputTextFile $ pkg.dir / ffiC
   let flags := #["-I", (← getLeanIncludeDir).toString, "-fPIC"]
@@ -19,7 +19,7 @@ target ffi.o pkg : FilePath := do
 extern_lib ffi pkg := do
   let name := nameToStaticLib "ffi"
   let job ← fetch <| pkg.target ``ffi.o
-  buildStaticLib (pkg.nativeLibDir / name) #[job]
+  buildStaticLib (pkg.buildDir / pkg.config.nativeLibDir / name) #[job]
 
 require batteries from git
   "https://github.com/leanprover-community/batteries" @ "v4.27.0-rc1"
