@@ -29,7 +29,7 @@ def pad (ar : Array α) (a : α) (n : Nat) : Array α :=
   ar ++ (.replicate diff a)
 
 instance [Ord α] : Ord (Array α) where
-  compare x y := compare x.data y.data
+  compare x y := compare x.toList y.toList
 
 def last (ar : Array α) : Array α := ar.toSubarray.popFront.toArray
 
