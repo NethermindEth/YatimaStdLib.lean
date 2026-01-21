@@ -62,11 +62,11 @@ instance [Chainable α] : Inhabited (AddChain α) where
   default := #[1]
 
 instance [Chainable α] : HAdd (AddChain α) α (AddChain α) where
-  hAdd ch n := ch.push (n + ch.back)
+  hAdd ch n := ch.push (n + ch.back?.getD default)
 
 instance [Chainable α] : Mul (AddChain α) where
   mul ch₁ ch₂ := 
-    let last := ch₁.back
+    let last := ch₁.back?.getD default
     let ch₂' := ch₂.last.map (fun x => x * last) 
     ch₁.append ch₂'
 
@@ -160,7 +160,7 @@ instance [Square α] : Mul α where
     | .double idx => 
       answer := answer.push (square answer[idx]!)
   
-  answer.back
+  answer.back?.getD default
 
 end Square
 
