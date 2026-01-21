@@ -113,7 +113,7 @@ def Nat.toBits : Nat → List Bit
   | 0 => [.zero]
   | 1 => [.one]
   | n + 2 =>
-    have h₁ : n + 2 ≠ 0 := by simp_arith
+    have h₁ : n + 2 ≠ 0 := by simp +arith
     Nat.toBits ((n + 2) / 2) ++ (if n % 2 = 0 then [.zero] else [.one])
   decreasing_by exact Nat.div2_lt h₁;
 
