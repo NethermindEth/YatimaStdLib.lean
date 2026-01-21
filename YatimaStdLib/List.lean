@@ -62,7 +62,7 @@ def splitAtP [BEq α] (p : α → Bool) (l : List α) : List α × List α :=
   | [] => (l, [])
   | a::as => ⟨l.takeWhile p ++ [a], as⟩
 
-def extract (l : List α) (b : Nat) (e : Nat) : List α :=
+def extract' (l : List α) (b : Nat) (e : Nat) : List α :=
   if b > e then l else
     let lₐ := l.drop b
     lₐ.take $ e - b
