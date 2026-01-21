@@ -30,7 +30,7 @@ def catOptions {α : Type u} : List (Option α) → List α := mapOption id
 
 open YatimaStdLib (One)
 
-protected def fold [HMul M M M] [One M] : List M → M
+protected def fold [HMul M M M] [YatimaStdLib.One M] : List M → M
   | [] => One.one
   | (x :: xs) => x * List.fold xs
 
