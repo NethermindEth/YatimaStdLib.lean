@@ -16,6 +16,6 @@ def blankIndent (n : Nat) : String :=
   let rec blankAux (cs : List Char) : Nat → List Char
     | 0     => cs
     | n + 1 => ' ' :: ' ' :: (blankAux cs n)
-  ⟨blankAux [] n⟩
+  String.ofList (blankAux [] n)
 
 end String
