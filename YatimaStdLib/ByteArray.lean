@@ -123,12 +123,15 @@ theorem sliceL.aux_size : (sliceL.aux acc n bs).size = acc.size + n := by
 theorem slice_size : (slice bytes i n).size = n := by
   simp [slice, sliceL, sliceL.aux, sliceL.aux_size, ByteArray.size]
 
-theorem set_size : (set arr i u).size = arr.size := by
-  simp [size, set]
+theorem set_size (arr : ByteArray) (i : Nat) (u : UInt8) (h : i < arr.size)
+                 : (set arr i u).size = arr.size := by
+  simp only [size, set]
+  rw [Array.size_set]
 
-theorem set!_size : (set! arr i u).size = arr.size := by
-  simp [size, set!, Array.set!, Array.setD]
-  by_cases h : i < arr.data.size <;> simp [h]
+theorem set!_size (arr : ByteArray) (i : Nat) (u : UInt8)
+                  : (set! arr i u).size = arr.size := by
+  simp only [size, set!]
+  simp [Array.set!]
 
 /-
 In this section we define Arithmetic on ByteArrays viewed as natural numbers encoded in
