@@ -86,8 +86,7 @@ def nonEmpty (l : List α) : Option (NEList α) :=
   | (x :: xs) => .some $ x :: xs
 
 def nonEmptyString (s : String) : Option (NEList Char) :=
-  match s with
-    | { data := str } => nonEmpty str
+  nonEmpty s.toList
 
 protected def fold [HMul M M M] (l : NEList M) : M :=
   let rec go (x : M) : List M → M
