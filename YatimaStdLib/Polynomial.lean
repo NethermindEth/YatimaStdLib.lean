@@ -69,7 +69,7 @@ def makeMonic (f : Polynomial A) : Polynomial A := (1 / f.lead) * f
 /-- Evaluates a polynomial at a particular value `a : A` -/
 def eval (f : Polynomial A) (a : A) : A :=
   let f := f.norm
-  let action (i : Fin f.size) c := c * a ^ (i : Nat)
+  let action (i : Nat) c := c * a ^ i
   Array.foldr (. + .) 0 (f.mapIdx action)
 
 private def zeros (n : Nat) : Polynomial A := Array.replicate n 0
