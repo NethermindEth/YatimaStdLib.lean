@@ -22,10 +22,10 @@ extern_lib ffi pkg := do
   buildStaticLib (pkg.nativeLibDir / name) #[job]
 
 require batteries from git
-  "https://github.com/leanprover-community/batteries" @ "v4.12.0"
+  "https://github.com/leanprover-community/batteries" @ "v4.27.0-rc1"
 
 require LSpec from git
-  "https://github.com/argumentcomputer/LSpec" @ "v4.12.0"
+  "https://github.com/NethermindEth/LSpec" @ "v4.27.0-rc1"
 
 section ImportAll
 
