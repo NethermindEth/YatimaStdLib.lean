@@ -4,7 +4,7 @@ namespace UInt8
 
 def showBits (u : UInt8) : String :=
   let numStr := u.toNat |> Nat.toDigits 2
-  "".pushn '0' (8 - numStr.length) ++ ⟨numStr⟩
+  "".pushn '0' (8 - numStr.length) ++ (String.ofList numStr)
 
 def toHexString (n : UInt8) : String :=
   let toLetter
