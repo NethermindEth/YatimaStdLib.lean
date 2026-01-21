@@ -112,12 +112,12 @@ theorem sliceL.aux_size : (sliceL.aux acc n bs).size = acc.size + n := by
   induction bs generalizing acc n
   · induction n
     · simp only [aux, Nat.add_zero]
-    · simp only [aux, Array.replicate, Nat.succ_eq_add_one, Array.append, Array.size]
-      simp only [Array.append_data, List.length_append, Array.data_length, List.length_replicate] -- TODO: Clean up this mess at some point
+    · simp only [aux, Array.replicate, Nat.succ_eq_add_one, Array.size]
+      simp +arith
   rename_i ih
   cases n
   · simp [sliceL.aux]
-  simp [sliceL.aux, ByteArray.size, ih]
+  simp [sliceL.aux, ih]
   rw [Nat.add_assoc, Nat.add_comm 1 _]
 
 theorem slice_size : (slice bytes i n).size = n := by
