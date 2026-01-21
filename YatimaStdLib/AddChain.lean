@@ -106,8 +106,8 @@ namespace AddChain
 private def findStep [Chainable α] (ch : AddChain α) (idx : Nat) : ChainStep := Id.run do
   let val := ch[idx]!
 
-  for (j, left) in ch.toList.enum do
-    for (k, right) in ch[:j + 1].toArray.toList.enum do
+  for (left, j) in ch.toList.zipIdx do
+    for (right, k) in ch[:j + 1].toArray.toList.zipIdx do
       if val == left + right then
         if j == k then
           return .double j else
@@ -120,7 +120,7 @@ def buildSteps [Chainable α] (ch : AddChain α) : Array ChainStep := Id.run do
   let mut answer := #[]
   let ch' := ch[1:].toArray
 
-  for (idx, _) in ch'.toList.enum do
+  for (_, idx) in ch'.toList.zipIdx do
     answer := answer.push $ findStep ch (idx + 1)
 
   return answer
