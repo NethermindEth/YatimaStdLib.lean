@@ -49,7 +49,7 @@ instance : BEq (Zmod n) where
   beq x y := x.norm == y.norm
 
 instance : Repr (Zmod n) where
-  reprPrec n _ := s!"0x{Nat.toDigits 16 (Zmod.norm n) |>.asString}"
+  reprPrec n _ := s!"0x{String.ofList (Nat.toDigits 16 (Zmod.norm n))}"
 
 def modSqrt (a : Zmod n) : Option (Zmod n) :=
   let a' := natAbs ∘ Zmod.rep $ a

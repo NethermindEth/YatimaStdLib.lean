@@ -9,8 +9,8 @@ Split a string at an index.
 ```
 -/
 def splitAt (n : Nat) (str : String) : String × String :=
-  match List.splitAt n str.data with
-    | (s₁,s₂) => (String.mk s₁, String.mk s₂)
+  match List.splitAt n str.toList with
+    | (s₁,s₂) => (String.ofList s₁, String.ofList s₂)
 
 def blankIndent (n : Nat) : String :=
   let rec blankAux (cs : List Char) : Nat → List Char

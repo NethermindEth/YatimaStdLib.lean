@@ -56,14 +56,14 @@ def toString (bs : ByteArray) : String := Id.run do
   let mut ans := "b["
   for u in bs do
     ans := ans ++ UInt8.showBits u ++ ","
-  return ans.dropRight 1 ++ "]"
+  return (ans.dropEnd 1).toString ++ "]"
 
 def toHexString (bs : ByteArray) : String := Id.run do
   if bs.isEmpty then "b[]" else
   let mut ans := "b["
   for u in bs do
     ans := ans ++ UInt8.toHexString u ++ ", "
-  return ans.dropRight 2 ++ "]"
+  return (ans.dropEnd 2).toString ++ "]"
 
 instance : Repr ByteArray where
   reprPrec bs _ := toString bs
@@ -121,7 +121,7 @@ theorem sliceL.aux_size : (sliceL.aux acc n bs).size = acc.size + n := by
   rw [Nat.add_assoc, Nat.add_comm 1 _]
 
 theorem slice_size : (slice bytes i n).size = n := by
-  simp [slice, sliceL, sliceL.aux, sliceL.aux_size, ByteArray.size]
+  simp [slice, sliceL, sliceL.aux_size, ByteArray.size]
 
 theorem set_size (arr : ByteArray) (i : Nat) (u : UInt8) (h : i < arr.size)
                  : (set arr i u).size = arr.size := by
