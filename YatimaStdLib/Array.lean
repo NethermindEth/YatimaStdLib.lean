@@ -10,7 +10,7 @@ def iota (n : Nat) : Array Nat :=
 instance : Monad Array where
   map := Array.map
   pure x := #[x]
-  bind l f := Array.join $ Array.map f l
+  bind l f := Array.flatten $ Array.map f l
 
 def shuffle (ar : Array α) (seed : Option Nat := none) [Inhabited α] :
     IO $ Array α := do

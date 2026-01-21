@@ -52,7 +52,7 @@ mutual
     | node x ts => x :: preorderF ts
   
   partial def preorderF (ts : List $ Tree α) : List α :=
-    (ts.map preorder).join
+    (ts.map preorder).flatten
 
 end
 
@@ -63,7 +63,7 @@ mutual
     | node x ts => postorderF ts ++ [x]
   
   partial def postorderF (ts : List $ Tree α) : List α :=
-    (ts.map postorder).join
+    (ts.map postorder).flatten
 
 end
 
