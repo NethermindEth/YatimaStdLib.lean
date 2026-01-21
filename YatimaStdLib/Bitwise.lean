@@ -49,7 +49,7 @@ def shiftRight m n := shiftLeft m (-n)
 
 instance : AndOp Int := ⟨land⟩
 instance : OrOp Int := ⟨lor⟩
-instance : Xor Int := ⟨lxor⟩
+instance : XorOp Int := ⟨lxor⟩
 instance : ShiftLeft  Int := ⟨shiftLeft⟩
 instance : ShiftRight Int := ⟨shiftRight⟩
 
