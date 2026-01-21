@@ -199,7 +199,7 @@ private def parseArgs (args : List String) : Except String TestMode :=
   match numIdx?, logIdx? with
   | none, none => .ok {rounds := 1, loggingMode := .stdOut}
   | some numIdx, none =>
-    if let some numIterStr := args.get? (numIdx + 1) then
+    if let some numIterStr := args[numIdx + 1]? then
       if let some numIter := numIterStr.toNat? then
         .ok {rounds := numIter, loggingMode := .stdOut}
       else
@@ -207,7 +207,7 @@ private def parseArgs (args : List String) : Except String TestMode :=
     else
       .error "-n or --num must be followed by a number of iterations"
   | none, some logIdx =>
-    if let some logName := args.get? (logIdx + 1) then
+    if let some logName := args[logIdx + 1]? then
       if logName != "-n" && logName != "--num" then
         .ok {rounds := 1, loggingMode := .fsOut logName}
       else
@@ -215,9 +215,9 @@ private def parseArgs (args : List String) : Except String TestMode :=
     else
       .ok {rounds := 1, loggingMode := .fsOut none}
   | some numIdx, some logIdx =>
-    if let some numIterStr := args.get? (numIdx + 1) then
+    if let some numIterStr := args[numIdx + 1]? then
       if let some numIter := numIterStr.toNat? then
-        if let some logName := args.get? (logIdx + 1) then
+        if let some logName := args[logIdx + 1]? then
           if logName != "-n" && logName != "--num" then
             .ok {rounds := numIter, loggingMode := .fsOut logName}
           else
