@@ -84,7 +84,7 @@ Shifts the byte array left by 1 bit, preserves length (so in particular kills th
 first coefficient
 -/
 def shiftLeft (bs : ByteArray) : ByteArray := Id.run do
-  let mut answer : ByteArray := .mkEmpty bs.size
+  let mut answer : ByteArray := .emptyWithCapacity bs.size
   for idx in [:bs.size] do
     answer := answer.push <|
       (getD bs idx 0 <<< 1 : UInt8) + (getD bs (idx + 1) 0 >>> 7 : UInt8)
