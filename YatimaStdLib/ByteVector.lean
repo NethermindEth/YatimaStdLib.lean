@@ -24,20 +24,24 @@ def ofByteArray (bytes : ByteArray) : ByteVector bytes.size :=
   ⟨bytes, rfl⟩
 
 def get (vec : ByteVector n) (i : Nat) (h : i < n) : UInt8 :=
-  vec.data.get ⟨i, by simp only [vec.valid, h]⟩
+  have h' : i < vec.data.size := by rw [vec.valid]; exact h
+  vec.data.get (Fin.mk i h')
 
 def get' (vec : ByteVector n) (i : Fin n) : UInt8 :=
-  vec.data.get ⟨i, by simp only [vec.valid, i.isLt]⟩
+  have h' : i.val < vec.data.size := by rw [vec.valid]; exact i.isLt
+  vec.data.get (Fin.mk i.val h')
 
 def get! (vec : ByteVector n) (i : Nat) : UInt8 :=
   vec.data.get! i
 
 def set (vec : ByteVector n) (i : Nat) (h : i < n) (u : UInt8) : ByteVector n :=
-  let data := vec.data.set ⟨i, by simp only [vec.valid, h]⟩ u
+  have h' : i < vec.data.size := by rw [vec.valid]; exact h
+  let data := vec.data.set (Fin.mk i h') u
   ⟨data, by rw [ByteArray.set_size, vec.valid]⟩
 
 def set' (vec : ByteVector n) (i : Fin n) (u : UInt8) : ByteVector n :=
-  let data := vec.data.set ⟨i, by simp only [vec.valid, i.isLt]⟩ u
+  have h' : i.val < vec.data.size := by rw [vec.valid]; exact i.isLt
+  let data := vec.data.set (Fin.mk i.val h') u
   ⟨data, by rw [ByteArray.set_size, vec.valid]⟩
 
 def set! (vec : ByteVector n) (i : Nat) (u : UInt8) : ByteVector n :=
