@@ -15,7 +15,7 @@ instance : BEq (ByteVector n) where
   beq x y := x.data == y.data
 
 def toString (vec : ByteVector n) : String :=
-  let str := s!"⟨{", ".intercalate (vec.data.data.data.map ToString.toString)}⟩"
+  let str := s!"⟨{", ".intercalate (vec.data.data.toList.map ToString.toString)}⟩"
   s!"{n.toSubscriptString}{str}"
 
 instance : ToString (ByteVector n) := ⟨toString⟩
