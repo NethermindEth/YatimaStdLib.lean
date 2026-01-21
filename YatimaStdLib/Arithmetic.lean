@@ -34,7 +34,7 @@ Calculates the discrete logarithm of using the Babystep-Giantstep algorithm, sho
 runtime
 -/
 def dLog (base result mod : Nat) : Option Nat := do
-  let mut basePowers : HashMap Nat Nat := .empty
+  let mut basePowers : HashMap Nat Nat := ∅
   let lim := mod.sqrt + 1
 
   let mut temp := 1
