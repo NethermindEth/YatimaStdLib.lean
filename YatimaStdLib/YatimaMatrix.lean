@@ -52,37 +52,37 @@ ensure a rectangular shape.
 Implementation detail: The nested arrays are actually the **columns** of the matrix, and not the rows.
 This is done to simplify the implementation of matrix action on vectors, and matrix multiplication.
 -/
-abbrev Matrix (R : Type) [YatimaRing R] := Array $ Array R
+abbrev YatimaMatrix (R : Type) [YatimaRing R] := Array $ Array R
 
-namespace Matrix
+namespace YatimaMatrix
 
 variable {R}
 
-def row (M : Matrix R) (i : Nat) : Vector' R := Id.run do
+def row (M : YatimaMatrix R) (i : Nat) : Vector' R := Id.run do
   let mut answer : Vector' R := #[]
   for col in M do
     answer := answer.push col[i]!
   return answer
 
-def transpose (M : Matrix R) : Matrix R := Id.run do
+def transpose (M : YatimaMatrix R) : YatimaMatrix R := Id.run do
   let rowNum := M[0]!.size
-  let mut answer : Matrix R := #[]
+  let mut answer : YatimaMatrix R := #[]
   for idx in List.range rowNum do
     answer := answer.push (row M idx)
   return answer
 
-def action (M : Matrix R) (v : Vector' R) : Vector' R :=
+def action (M : YatimaMatrix R) (v : Vector' R) : Vector' R :=
   M.zip v |>.foldl (fun v (col, r) => v + r * col) (Vector'.zero R v.size)
 
-def mul (M N : Matrix R) : Matrix R :=
+def mul (M N : YatimaMatrix R) : YatimaMatrix R :=
   N.map (fun v => action M v)
 
-instance : HMul R (Matrix R) (Matrix R) where
+instance : HMul R (YatimaMatrix R) (YatimaMatrix R) where
   hMul r m := m.map fun v => r * v
 
-def twoInv [YatimaField R] (M : Matrix R) : Matrix R :=
+def twoInv [YatimaField R] (M : YatimaMatrix R) : YatimaMatrix R :=
   let det := M[0]![0]! * M[1]![1]! - M[0]![1]! * M[1]![0]!
   (YatimaField.inv det) * #[#[M[1]![1]!, -M[0]![1]!], #[-M[1]![0]!, M[0]![0]!]]
 
-end Matrix
+end YatimaMatrix
 end matrix

@@ -1,6 +1,6 @@
 import YatimaStdLib.Benchmark
 import YatimaStdLib.Functions
-import YatimaStdLib.Matrix
+import YatimaStdLib.YatimaMatrix
 
 open Benchmark
 
@@ -16,15 +16,15 @@ instance : FixedSize (Vector' Nat) where
   size vec := vec.size
 
 open FixedSize in
-instance : FixedSize (Matrix Nat) where
+instance : FixedSize (YatimaMatrix Nat) where
   random size := do
-    let mut answer : Matrix Nat := #[]
+    let mut answer : YatimaMatrix Nat := #[]
     for _ in [:size] do
       answer := answer.push (← random size)
     return answer
   size vec := vec.size
 
-def matrixAction := @Matrix.action Nat
+def matrixAction := @YatimaMatrix.action Nat
 
 def matrixBench : FunctionAsymptotics $ unCurry matrixAction where
   inputSizes := Array.stdSizes 12

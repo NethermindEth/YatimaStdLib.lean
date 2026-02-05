@@ -79,5 +79,5 @@ lean_exe Tests.UInt
 /- Benchmarks -/
 lean_exe Benchmarks.AddChain
 lean_exe Benchmarks.ByteArray
-lean_exe Benchmarks.Matrix
+lean_exe Benchmarks.YatimaMatrix
 lean_exe Benchmarks.SparseMatrix

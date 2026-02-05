@@ -26,7 +26,7 @@ import YatimaStdLib.List
 import YatimaStdLib.MLE.MultilinearExtension
 import YatimaStdLib.MLE.MultilinearLagrangeData
 import YatimaStdLib.MLE.MultilinearLagrangePolynomial
-import YatimaStdLib.Matrix
+import YatimaStdLib.YatimaMatrix
 import YatimaStdLib.Monad
 import YatimaStdLib.MultilinearPolynomial
 import YatimaStdLib.Nat

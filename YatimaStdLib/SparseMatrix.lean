@@ -74,7 +74,7 @@ instance : Inhabited (SparseMatrix R) where
   default := SparseMatrix.empty 0 0
 
 /--
-Matrix dimension
+YatimaMatrix dimension
 -/
 def dim (m : SparseMatrix R) : Nat × Nat :=
   (m.rows, m.cols)
