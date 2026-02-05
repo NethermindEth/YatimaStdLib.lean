@@ -1,6 +1,6 @@
 import YatimaStdLib.Int
 import YatimaStdLib.Nat
-import YatimaStdLib.Ring
+import YatimaStdLib.YatimaRing
 
 structure Zmod (_ : Nat) where
   rep : Int

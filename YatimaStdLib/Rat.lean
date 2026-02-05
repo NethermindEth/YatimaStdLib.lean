@@ -1,4 +1,4 @@
-import YatimaStdLib.Ring
+import YatimaStdLib.YatimaRing
 
 namespace Rat
 

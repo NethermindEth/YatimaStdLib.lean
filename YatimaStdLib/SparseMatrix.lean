@@ -1,7 +1,7 @@
 import Batteries.Data.RBMap
 import YatimaStdLib.Array
 import YatimaStdLib.Ord
-import YatimaStdLib.Ring
+import YatimaStdLib.YatimaRing
 import YatimaStdLib.RBMap
 
 structure SparseMatrix (R : Type _) where
@@ -88,7 +88,7 @@ def transpose (m : SparseMatrix R) : SparseMatrix R :=
     m.cols
     m.rows
 
-variable [Ring R] [BEq R]
+variable [YatimaRing R] [BEq R]
 
 /--
 Sparse matrix addition. This implementation assumes that the matrices have the

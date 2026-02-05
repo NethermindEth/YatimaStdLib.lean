@@ -1,4 +1,4 @@
-import YatimaStdLib.Ring
+import YatimaStdLib.YatimaRing
 
 /-!
 # Basic Linear Algebra
@@ -8,7 +8,7 @@ Note we do not use any dependent types or any useful features of Lean. This was 
 will hopefully improve with time and more lemmas about arrays available in `std4`
 -/
 
-variable (R : Type) [Ring R]
+variable (R : Type) [YatimaRing R]
 
 section vector
 
@@ -44,7 +44,7 @@ end vector
 section matrix
 
 /--
-The type of matrices over a `Ring R`
+The type of matrices over a `YatimaRing R`
 
 This is an abbreviation for `Array (Array R)`, so no checks are made on the shape of the array to
 ensure a rectangular shape.
@@ -52,7 +52,7 @@ ensure a rectangular shape.
 Implementation detail: The nested arrays are actually the **columns** of the matrix, and not the rows.
 This is done to simplify the implementation of matrix action on vectors, and matrix multiplication.
 -/
-abbrev Matrix (R : Type) [Ring R] := Array $ Array R
+abbrev Matrix (R : Type) [YatimaRing R] := Array $ Array R
 
 namespace Matrix
 

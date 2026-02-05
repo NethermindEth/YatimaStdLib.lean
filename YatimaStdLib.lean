@@ -38,7 +38,7 @@ import YatimaStdLib.RBMap
 import YatimaStdLib.RWST
 import YatimaStdLib.Random
 import YatimaStdLib.Rat
-import YatimaStdLib.Ring
+import YatimaStdLib.YatimaRing
 import YatimaStdLib.Seq
 import YatimaStdLib.SparseMatrix
 import YatimaStdLib.String
