@@ -33,14 +33,14 @@ instance [Ring R] : Inhabited R where
 
 end Ring
 
-class Field (K : Type) extends Ring K where
+class YatimaField (K : Type) extends Ring K where
   inv : K → K
 
-namespace Field
+namespace YatimaField
 
-instance [Field K] : Div K where
-  div a b := a * Field.inv b
+instance [YatimaField K] : Div K where
+  div a b := a * YatimaField.inv b
 
 postfix:max "⁻¹" => inv
 
-end Field
+end YatimaField

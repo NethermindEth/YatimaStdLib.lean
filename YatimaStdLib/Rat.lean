@@ -14,7 +14,7 @@ def powAux (base : Rat) (exp : Nat) : Rat :=
       else go (power * power) (acc * power) n'
   go base 1 exp
 
-instance : Field Rat where
+instance : YatimaField Rat where
   hPow r n := powAux r n
   coe a := { num := a, reduced := by simp only [Nat.Coprime, Nat.coprime_one_right]}
   zero := 0
